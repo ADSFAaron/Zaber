@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/custom_input.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/loginBtn.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/login_btn.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_login.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
       </map>
     </option>
