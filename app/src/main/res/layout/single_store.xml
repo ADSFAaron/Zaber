@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toStartOf="@id/store_type"
             android:id="@+id/store_name"
             app:layout_constraintHorizontal_weight="5"
-            android:text="Mcdonald"
+            android:text="Mcdonald."
             android:textSize="20dp" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:id="@+id/store_type"
             app:layout_constraintHorizontal_weight="4"
             android:gravity="center"
-            android:text="Fast Food"
+            android:text="Fast Food."
             android:textSize="20dp" />
 
         <TextView
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/store_score"
             app:layout_constraintHorizontal_weight="1"
-            android:text="4.5"
+            android:text="4.5."
             android:textSize="14dp"
             android:gravity="right"/>
 

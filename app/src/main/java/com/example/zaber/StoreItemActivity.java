@@ -9,10 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CustomerActivity extends AppCompatActivity {
+public class StoreItemActivity extends AppCompatActivity{
     ListView lv;
     Context context;
     //ArrayList proglist;
@@ -22,24 +19,24 @@ public class CustomerActivity extends AppCompatActivity {
     };
 
     public static String[] progNames = {
-            "Store1","Store2","Store3","Store4","Store5"
+            "StoreItem1","StoreItem2","StoreItem3","StoreItem4","StoreItem5"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customer_menu);
+        setContentView(R.layout.customer_store);
 
-        StoreListAdapter adapter = new StoreListAdapter(this,progNames,progImages);
+        StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages);
 
-        lv = (ListView) findViewById(R.id.listview);
+        lv = (ListView) findViewById(R.id.item_list);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 //Do something
-                Intent intent = new Intent(CustomerActivity.this, StoreItemActivity.class);
+                Intent intent = new Intent(StoreItemActivity.this, OrderActivity.class);
                 startActivity(intent);
                 finish();
             }
