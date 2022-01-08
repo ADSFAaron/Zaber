@@ -61,14 +61,15 @@
             android:gravity="left"/>
 
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/store_msg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:divider="@android:color/transparent"
             android:dividerHeight="20dp"
-            android:divider="@android:color/transparent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_msg"
+            app:layout_constraintHeight_percent="0.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
