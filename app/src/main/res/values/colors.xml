@@ -21,4 +21,5 @@
     <color name="dark_font">#3B3E51</color>
     <color name="light_font">#C5CAE6</color>
     <color name="light_input_bg">#F6F6F6</color>
+    <color name="light_gray">#E8E8E8</color>
 </resources>

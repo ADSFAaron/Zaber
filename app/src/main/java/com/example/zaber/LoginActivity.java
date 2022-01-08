@@ -3,6 +3,7 @@ package com.example.zaber;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -27,11 +28,16 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.login_password);
         loginBtn = findViewById(R.id.login_button);
 
-        String mail = email.getText().toString(),pw = password.getText().toString();
+        String mail = email.getText().toString(), pw = password.getText().toString();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // After Onclick
+
+                // Develop use
+                Intent intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
