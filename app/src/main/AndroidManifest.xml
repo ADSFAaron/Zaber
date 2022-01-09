@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zaber">
         <activity
+            android:name=".AudioChooseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistoryOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoreOpenActivity"
             android:exported="false" />
         <activity

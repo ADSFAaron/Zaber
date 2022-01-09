@@ -48,12 +48,19 @@ public class StoreHomeActivity extends AppCompatActivity {
         changeGreed(storeName);
 
         // Button Click
-        store_home_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(StoreHomeActivity.this, StoreOpenActivity.class);
-                startActivity(intent);
-            }
+        store_home_open.setOnClickListener(view -> {
+            Intent intent = new Intent(StoreHomeActivity.this, StoreOpenActivity.class);
+            startActivity(intent);
+        });
+
+        store_home_history_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(StoreHomeActivity.this, HistoryOrderActivity.class);
+            startActivity(intent);
+        });
+
+        store_home_voice_hint_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(StoreHomeActivity.this, AudioChooseActivity.class);
+            startActivity(intent);
         });
 
     }
