@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zaber">
         <activity
+            android:name=".OrderStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderCheckActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderActivity"
             android:exported="false" />
         <activity

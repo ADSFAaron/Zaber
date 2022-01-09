@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class StoreItemActivity extends AppCompatActivity{
+    Button shopping_cart_btn;
+
     ListView lv;
     Context context;
     //ArrayList proglist;
@@ -29,8 +32,11 @@ public class StoreItemActivity extends AppCompatActivity{
 
         StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages);
 
+        shopping_cart_btn = findViewById(R.id.shopping_cart_btn);
         lv = (ListView) findViewById(R.id.item_list);
+
         lv.setAdapter(adapter);
+        shopping_cart_btn.setOnClickListener(shopping_cart);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -42,4 +48,14 @@ public class StoreItemActivity extends AppCompatActivity{
             }
         });
     }
+
+    private View.OnClickListener shopping_cart = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //Do something
+            Intent intent = new Intent(StoreItemActivity.this, OrderCheckActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
 }
