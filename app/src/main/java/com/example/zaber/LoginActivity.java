@@ -2,10 +2,15 @@ package com.example.zaber;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,20 +30,33 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.login_password);
         login_btn = findViewById(R.id.login_btn);
 
-        login_btn.setOnClickListener(customer_menu);
-
-        // Validation
 
         // Redirection customer or store
-    }
+        login_btn.setOnClickListener(view -> {
+            String mail = Objects.requireNonNull(email.getText()).toString(), pw = Objects.requireNonNull(password.getText()).toString();
+            System.out.println("Mail: " + mail);
+            System.out.println("Password: " + pw);
 
-    private View.OnClickListener customer_menu = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //Do something
-            Intent intent = new Intent(LoginActivity.this, CustomerActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
+            // After Onclick
+            if (!mail.isEmpty() && !pw.isEmpty()) {
+                Intent intent = null;
+
+                // Switch Account
+                if (mail.equals("customer@a.com")) {
+                    System.out.println("Customer Account");
+                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                } else if (mail.equals("store@a.com")) {
+                    System.out.println("Store Account");
+                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+                } else {
+                    System.out.println("Error Account : " + mail);
+                }
+
+                startActivity(intent);
+                finish();
+            }
+
+        });
+
+    }
 }
