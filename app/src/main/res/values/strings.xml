@@ -13,4 +13,10 @@
     <string name="store_open">開始營業</string>
     <string name="edit_store">編輯店家資料</string>
     <string name="today_take_day_off">本日公休</string>
+    <string name="store_close">結束接單</string>
+    <string name="store_online">上線中</string>
+    <string name="order_delay_time">延長時間</string>
+    <string name="order_complete">完成訂單</string>
+    <string name="multiple_page_change">Multiple Page Change</string>
+    <string name="in_progress">製作中</string>
 </resources>

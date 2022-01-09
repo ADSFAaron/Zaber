@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/circle_avatar.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/close_button.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/custom_input.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/ic_outline_create_24.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/loginBtn.xml" value="0.17291666666666666" />
@@ -12,7 +13,10 @@
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/round_button.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_login.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_store_home.xml" value="0.40511440107671604" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_store_home.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/activity_store_open.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/new_order_row.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/layout/order_row.xml" value="0.16666666666666666" />
       </map>
     </option>
   </component>
