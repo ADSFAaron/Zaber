@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 public class StoreOpenActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -29,7 +31,10 @@ public class StoreOpenActivity extends AppCompatActivity {
         String[] testOrder1 = {"餐點一", "餐點二", "餐點三"};
         String[] testOrder2 = {"餐點一", "餐點二"};
         String[] testOrder3 = {"餐點一", "餐點二", "餐點三", "餐點四"};
-        String[][] testOrder = {testOrder1, testOrder2, testOrder3};
+        ArrayList<String[]> testOrder = new ArrayList<>();
+        testOrder.add(testOrder1);
+        testOrder.add(testOrder2);
+        testOrder.add(testOrder3);
         String user = "真滋味";
 
         StoreOrderAdapter storeOrderAdapter = new StoreOrderAdapter(this, testOrder, user);

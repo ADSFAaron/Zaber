@@ -19,4 +19,7 @@
     <string name="order_complete">完成訂單</string>
     <string name="multiple_page_change">Multiple Page Change</string>
     <string name="in_progress">製作中</string>
+    <string name="decline">拒絕</string>
+    <string name="accept">接受</string>
+    <string name="new_order">新訂單</string>
 </resources>

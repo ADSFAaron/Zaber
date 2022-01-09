@@ -10,14 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.StoreOrderViewHolder> {
 
-    String[][] orderItems;
+    ArrayList<String[]> orderItems;
     String user;
     Context context;
     int currentNo;
 
-    public StoreOrderAdapter(Context context, String[][] orderItems, String user) {
+    public StoreOrderAdapter(Context context, ArrayList<String[]> orderItems, String user) {
         this.orderItems = orderItems;
         this.user = user;
         this.context = context;
@@ -30,7 +32,7 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
     public StoreOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.order_row, parent, false);
-        return new StoreOrderViewHolder(view);
+        return new StoreOrderViewHolder(view).linkAdapter(this);
     }
 
     @Override
@@ -39,7 +41,7 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
         String status = "製作中";
         StringBuilder orderText = new StringBuilder();
 
-        String[] orderItem = orderItems[position];
+        String[] orderItem = orderItems.get(position);
         for (int i = 0, orderItemLength = orderItem.length; i < orderItemLength; i++) {
             String s = orderItem[i];
             orderText.append(i + 1).append(". ").append(s).append("\n");
@@ -52,13 +54,15 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
 
     @Override
     public int getItemCount() {
-        return orderItems.length;
+        return orderItems.size();
     }
+
 
     public class StoreOrderViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatButton order_delay, order_complete;
         TextView order_item, order_no, order_status;
+        private StoreOrderAdapter adapter;
 
         public StoreOrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +73,19 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
             order_item = itemView.findViewById(R.id.order_item);
             order_no = itemView.findViewById(R.id.order_no);
             order_status = itemView.findViewById(R.id.order_status);
+
+            order_complete.setOnClickListener(view -> {
+                System.out.println("Remove Index: " + getAbsoluteAdapterPosition());
+                System.out.println("Remove Index: " + getBindingAdapterPosition());
+                adapter.orderItems.remove(getAbsoluteAdapterPosition());
+                adapter.notifyItemRemoved(getAbsoluteAdapterPosition());
+
+            });
+        }
+
+        public StoreOrderViewHolder linkAdapter(StoreOrderAdapter adapter) {
+            this.adapter = adapter;
+            return this;
         }
     }
 }
