@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/store_image"
+            android:src="@drawable/store_image"
+            android:scaleType="fitXY"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/store_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/store_type"
+            android:id="@+id/store_name"
+            app:layout_constraintHorizontal_weight="5"
+            android:text="Mcdonald."
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/store_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/store_name"
+            app:layout_constraintEnd_toStartOf="@id/store_score"
+            android:id="@+id/store_type"
+            app:layout_constraintHorizontal_weight="4"
+            android:gravity="center"
+            android:text="Fast Food."
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/store_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/store_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/store_score"
+            app:layout_constraintHorizontal_weight="1"
+            android:text="4.5."
+            android:textSize="14dp"
+            android:gravity="right"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
