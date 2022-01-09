@@ -16,6 +16,21 @@
             android:name=".StoreHomeActivity"
             android:exported="false" />
         <activity
+            android:name=".OrderStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StoreItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
