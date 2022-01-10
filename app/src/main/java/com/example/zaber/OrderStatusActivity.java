@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class OrderStatusActivity extends AppCompatActivity {
     Button call_store_btn;
     TextView number,money;
@@ -33,7 +35,13 @@ public class OrderStatusActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //Do something
-
+            Intent intent = null;
+            intent = new Intent(OrderStatusActivity.this, CustomerActivity.class);
+            bundle.putString("money","0");
+            bundle.putStringArrayList("merchandise", new ArrayList<String>());
+            intent.putExtra("bundle",bundle);
+            startActivity(intent);
+            finish();
         }
     };
 }

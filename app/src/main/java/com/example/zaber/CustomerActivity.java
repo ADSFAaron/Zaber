@@ -26,7 +26,7 @@ public class CustomerActivity extends AppCompatActivity {
     };
 
     public static String[] progNames = {
-            "Store1", "Store2", "Store3", "Store4", "Store5"
+            "仙桃總鋪", "陽光麵食", "冰窖水果部", "山口壽司", "八方雲集"
     };
 
     @Override
@@ -39,7 +39,7 @@ public class CustomerActivity extends AppCompatActivity {
         String emailName=bundle.get("email").toString();
         if(emailName.indexOf("@")!=-1)
             emailName=emailName.substring(0,emailName.indexOf("@"));
-        welcome.setText("歡迎回來, "+emailName);
+        welcome.setText("    歡迎回來, "+emailName);
 
         StoreListAdapter adapter = new StoreListAdapter(this,progNames,progImages);
 
@@ -61,5 +61,6 @@ public class CustomerActivity extends AppCompatActivity {
 
     public void updateBundle(String store){
         bundle.putString("orderstatus",store);
+        bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
     }
 }

@@ -35,9 +35,11 @@ public class OrderCheckActivity extends AppCompatActivity {
         setContentView(R.layout.order_check);
         bundle=getIntent().getBundleExtra("bundle");
         ArrayList<String> itemList=bundle.getStringArrayList("merchandise");
+        ArrayList<String> moneyList=bundle.getStringArrayList("singleItemALL");
+
 //        Log.d("bundle !!!!!!", bundle.getStringArrayList("merchandise").toString());
 
-        ShoppingListAdapter adapter = new ShoppingListAdapter(this,itemList.toArray(new String[0]));
+        ShoppingListAdapter adapter = new ShoppingListAdapter(this,itemList.toArray(new String[0]),moneyList.toArray(new String[0]));
 
         money=findViewById(R.id.money);
         money.setText(bundle.get("money").toString()+"元");

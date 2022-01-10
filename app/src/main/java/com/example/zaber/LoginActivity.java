@@ -57,26 +57,33 @@ public class LoginActivity extends AppCompatActivity {
             // After Onclick
             if (!mail.isEmpty() && !pw.isEmpty()) {
                 Intent intent = null;
-
+                System.out.println("Customer Account");
+                CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+                CustomerInfo.setCustomerPassword(password.getEditableText().toString());
+                intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                logins();
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+                finish();
                 // Switch Account
-                if (mail.equals("customer@a.com")) {
-                    System.out.println("Customer Account");
-                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
-                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
-                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
-                    logins();
-                    intent.putExtra("bundle",bundle);
-                    startActivity(intent);
-                    finish();
-                } else if (mail.equals("store@a.com")) {
-                    System.out.println("Store Account");
-                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Error Account : " + mail, Toast.LENGTH_SHORT).show();
-                    System.out.println("Error Account : " + mail);
-                }
+//                if (mail.equals("customer@a.com")) {
+//                    System.out.println("Customer Account");
+//                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+//                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
+//                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
+//                    logins();
+//                    intent.putExtra("bundle",bundle);
+//                    startActivity(intent);
+//                    finish();
+//                } else if (mail.equals("store@a.com")) {
+//                    System.out.println("Store Account");
+//                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(LoginActivity.this, "Error Account : " + mail, Toast.LENGTH_SHORT).show();
+//                    System.out.println("Error Account : " + mail);
+//                }
 
             }
             else{
@@ -117,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("orderstatus",CustomerInfo.getorderStatus());
         bundle.putStringArrayList("merchandise",CustomerInfo.getMerchandise());
         bundle.putString("money",CustomerInfo.getMoney().toString());
+        bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
     }
 
 

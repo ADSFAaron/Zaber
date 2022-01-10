@@ -12,12 +12,14 @@ public class StoreItemListAdapter extends ArrayAdapter<String> {
     private  final Activity context;
     private  final String[] progNames;
     private  final Integer[] progImages;
+    private  final String[] progmoney;
 
-    public StoreItemListAdapter(Activity context, String[] progNames, Integer[] progImages){
+    public StoreItemListAdapter(Activity context, String[] progNames, Integer[] progImages, String[] progmoney){
         super(context,R.layout.single_store,progNames);
         this.context=context;
         this.progNames=progNames;
         this.progImages=progImages;
+        this.progmoney=progmoney;
     }
 
     @Override
@@ -27,9 +29,11 @@ public class StoreItemListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.single_item,null,true);
         TextView textView = (TextView) rowView.findViewById(R.id.item_name);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.item_image);
+        TextView money = (TextView) rowView.findViewById(R.id.item_price);
 
         textView.setText(progNames[position]);
         imageView.setImageResource(progImages[position]);
+        money.setText("$"+progmoney[position]);
 
         return  rowView;
     }

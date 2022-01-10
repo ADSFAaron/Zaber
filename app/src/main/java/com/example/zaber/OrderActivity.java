@@ -35,7 +35,7 @@ public class OrderActivity extends AppCompatActivity{
     public void itemClicked(View v) {
         CheckBox checkBox=(CheckBox)v;
         if(checkBox.isChecked()){
-            addmore=" 加飯";
+            addmore=" 加量";
         }
         else
             addmore="";
@@ -56,6 +56,6 @@ public class OrderActivity extends AppCompatActivity{
         ArrayList<String> req=bundle.getStringArrayList("merchandise");
         req.add(item);
         bundle.putStringArrayList("merchandise",req);
-        bundle.putString("money",Integer.toString(Integer.parseInt(bundle.get("money").toString())+200));
+        bundle.putString("money",Integer.toString(Integer.parseInt(bundle.get("money").toString())+Integer.parseInt(bundle.get("singleMoney").toString())));
     }
 }
