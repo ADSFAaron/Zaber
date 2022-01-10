@@ -10,24 +10,42 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderStatusActivity extends AppCompatActivity {
     Button call_store_btn;
     TextView number,money;
     Bundle bundle;
+    TextView times;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_status);
         bundle=getIntent().getBundleExtra("bundle");
+        times=findViewById(R.id.time);
         call_store_btn = findViewById(R.id.call_store_btn);
         call_store_btn.setOnClickListener(call_store);
         number=findViewById(R.id.number);
         number.setText(bundle.get("number").toString());
         money=findViewById(R.id.money);
         money.setText("$ "+bundle.get("money").toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String currentTime=formatter.format(date).toString();
+        Integer left=Integer.parseInt(currentTime.substring(0,currentTime.indexOf(":")));
+        Integer right=Integer.parseInt(currentTime.substring(currentTime.indexOf(":")+1));
+        right+=15;
+        if(right/60==1){
+            left+=1;
+            right%=60;
+        }
+        if(left/24==1)
+            left%=24;
+        times.setText(currentTime.toString()+"~"+left.toString()+":"+right.toString());
 
     }
 

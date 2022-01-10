@@ -16,13 +16,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OrderCheckActivity extends AppCompatActivity {
 
     Button order_confirm_btn;
     ListView lv;
     Bundle bundle;
-    TextView money;
+    TextView money,times;
     CustomerInformation CustomerInfo=new CustomerInformation();
 
     public static String[] progNames = {
@@ -43,7 +45,20 @@ public class OrderCheckActivity extends AppCompatActivity {
 
         money=findViewById(R.id.money);
         money.setText(bundle.get("money").toString()+"元");
-
+        times=findViewById(R.id.time);
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        String currentTime=formatter.format(date).toString();
+        Integer left=Integer.parseInt(currentTime.substring(0,currentTime.indexOf(":")));
+        Integer right=Integer.parseInt(currentTime.substring(currentTime.indexOf(":")+1));
+        right+=15;
+        if(right/60==1){
+            left+=1;
+            right%=60;
+        }
+        if(left/24==1)
+            left%=24;
+        times.setText(currentTime.toString()+"~"+left.toString()+":"+right.toString());
         order_confirm_btn = findViewById(R.id.order_confirm_btn);
         lv = (ListView) findViewById(R.id.order_list);
 
@@ -76,7 +91,7 @@ public class OrderCheckActivity extends AppCompatActivity {
             bundle.putString("number",CustomerInfo.getNumber().toString());
             intent.putExtra("bundle",bundle);
             startActivity(intent);
-            finish();
+//            finish();
         }
     };
 }
