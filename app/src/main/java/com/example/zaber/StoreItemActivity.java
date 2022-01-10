@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class StoreItemActivity extends AppCompatActivity{
     Button shopping_cart_btn;
 
     ListView lv;
     Context context;
+    Bundle bundle;
+    TextView store_name;
     //ArrayList proglist;
 
     public static Integer[] progImages = {
@@ -29,8 +33,12 @@ public class StoreItemActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_store);
-
+        bundle=getIntent().getBundleExtra("bundle");
+        Log.d("SSSSSSSSSSSS::::", getIntent().getBundleExtra("bundle").getString("orderstatus"));
         StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages);
+
+        store_name=findViewById(R.id.store_name);
+        store_name.setText(bundle.get("orderstatus").toString());
 
         shopping_cart_btn = findViewById(R.id.shopping_cart_btn);
         lv = (ListView) findViewById(R.id.item_list);
@@ -43,6 +51,8 @@ public class StoreItemActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 //Do something
                 Intent intent = new Intent(StoreItemActivity.this, OrderActivity.class);
+                bundle.putString("item",progNames[index]);
+                intent.putExtra("bundle",bundle);
                 startActivity(intent);
                 finish();
             }
@@ -54,6 +64,7 @@ public class StoreItemActivity extends AppCompatActivity{
         public void onClick(View v) {
             //Do something
             Intent intent = new Intent(StoreItemActivity.this, OrderCheckActivity.class);
+            intent.putExtra("bundle",bundle);
             startActivity(intent);
             finish();
         }
