@@ -48,7 +48,7 @@ public class OrderActivity extends AppCompatActivity{
             updateBundle(item_name.getText().toString()+addmore);
             intent.putExtra("bundle",bundle);
             startActivity(intent);
-            finish();
+//            finish();
         }
     };
 

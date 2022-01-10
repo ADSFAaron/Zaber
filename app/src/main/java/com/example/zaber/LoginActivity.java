@@ -57,33 +57,24 @@ public class LoginActivity extends AppCompatActivity {
             // After Onclick
             if (!mail.isEmpty() && !pw.isEmpty()) {
                 Intent intent = null;
-                System.out.println("Customer Account");
-                CustomerInfo.setCustomerEmail(email.getEditableText().toString());
-                CustomerInfo.setCustomerPassword(password.getEditableText().toString());
-                intent = new Intent(LoginActivity.this, CustomerActivity.class);
-                logins();
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
-                finish();
+
                 // Switch Account
-//                if (mail.equals("customer@a.com")) {
-//                    System.out.println("Customer Account");
-//                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
-//                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
-//                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
-//                    logins();
-//                    intent.putExtra("bundle",bundle);
-//                    startActivity(intent);
+                if (mail.indexOf("!")==-1) {
+                    System.out.println("Customer Account");
+                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
+                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                    logins();
+                    intent.putExtra("bundle",bundle);
+                    startActivity(intent);
 //                    finish();
-//                } else if (mail.equals("store@a.com")) {
-//                    System.out.println("Store Account");
-//                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
-//                    startActivity(intent);
+                }
+                else{
+                    System.out.println("Store Account");
+                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+                    startActivity(intent);
 //                    finish();
-//                } else {
-//                    Toast.makeText(LoginActivity.this, "Error Account : " + mail, Toast.LENGTH_SHORT).show();
-//                    System.out.println("Error Account : " + mail);
-//                }
+                }
 
             }
             else{
@@ -97,24 +88,24 @@ public class LoginActivity extends AppCompatActivity {
 //        Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
 //    else
 //        transitions();
-    private void addDatatoFirebase(){
-        String emailName=CustomerInfo.getCustomerEmail();
-        if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
-            emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
-        System.out.println("Account verify : " + emailName);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference targetRef=root.child("users").child(emailName);
-        targetRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                logins();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG", "onCancelled", databaseError.toException());
-            }
-        });
-    }
+//    private void addDatatoFirebase(){
+//        String emailName=CustomerInfo.getCustomerEmail();
+//        if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
+//            emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
+//        System.out.println("Account verify : " + emailName);
+//        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference targetRef=root.child("users").child(emailName);
+//        targetRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                logins();
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.w("TAG", "onCancelled", databaseError.toException());
+//            }
+//        });
+//    }
 
     public void logins(){
 //        DatabaseReference root = FirebaseDatabase.getInstance().getReference();

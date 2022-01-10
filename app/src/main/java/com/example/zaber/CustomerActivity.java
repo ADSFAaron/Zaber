@@ -54,7 +54,7 @@ public class CustomerActivity extends AppCompatActivity {
                 updateBundle(progNames[index]);
                 intent.putExtra("bundle",bundle);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
     }
