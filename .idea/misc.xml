@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/activity_audio_choose.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/activity_login.xml" value="0.12817028985507245" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/activity_store_home.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/activity_store_open.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/customer_menu.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/customer_store.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/item_option.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/new_order_row.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/order_check.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/order_row.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/order_status.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/single_item.xml" value="0.19947916666666668" />
+        <entry key="..\:/Career/Program_Project/Application/Zaber/app/src/main/res/layout/single_orderitem.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/circle_avatar.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/close_button.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/aaron/AndroidStudioProjects/Zaber/app/src/main/res/drawable/contained_button.xml" value="0.17291666666666666" />

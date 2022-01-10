@@ -1,15 +1,30 @@
 package com.example.zaber;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView loginTab, registerTab;
     TextInputEditText email, password;
     Button login_btn;
+    Bundle bundle=new Bundle();
+    CustomerInformation CustomerInfo=new CustomerInformation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +57,75 @@ public class LoginActivity extends AppCompatActivity {
             // After Onclick
             if (!mail.isEmpty() && !pw.isEmpty()) {
                 Intent intent = null;
-
-                // Switch Account
-                if (mail.equals("customer@a.com")) {
-                    System.out.println("Customer Account");
-                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
-                } else if (mail.equals("store@a.com")) {
-                    System.out.println("Store Account");
-                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
-                } else {
-                    System.out.println("Error Account : " + mail);
-                }
-
+                System.out.println("Customer Account");
+                CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+                CustomerInfo.setCustomerPassword(password.getEditableText().toString());
+                intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                logins();
+                intent.putExtra("bundle",bundle);
                 startActivity(intent);
                 finish();
+                // Switch Account
+//                if (mail.equals("customer@a.com")) {
+//                    System.out.println("Customer Account");
+//                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+//                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
+//                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
+//                    logins();
+//                    intent.putExtra("bundle",bundle);
+//                    startActivity(intent);
+//                    finish();
+//                } else if (mail.equals("store@a.com")) {
+//                    System.out.println("Store Account");
+//                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(LoginActivity.this, "Error Account : " + mail, Toast.LENGTH_SHORT).show();
+//                    System.out.println("Error Account : " + mail);
+//                }
+
+            }
+            else{
+                Toast.makeText(LoginActivity.this, "Can place Empty!!!", Toast.LENGTH_SHORT).show();
             }
 
         });
-
     }
+//    Log.i("customerEmail.........", dataSnapshot.child("customerEmail").getValue(String.class));
+//    if(CustomerInfo.getCustomerEmail().equals(dataSnapshot.child("customerEmail").getValue(String.class)))
+//        Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
+//    else
+//        transitions();
+    private void addDatatoFirebase(){
+        String emailName=CustomerInfo.getCustomerEmail();
+        if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
+            emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
+        System.out.println("Account verify : " + emailName);
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference targetRef=root.child("users").child(emailName);
+        targetRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                logins();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    public void logins(){
+//        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+//        root.child("users").child(CustomerInfo.getCustomerEmail()).setValue(CustomerInfo);
+        bundle.putString("email",CustomerInfo.getCustomerEmail());
+        bundle.putString("pwd",CustomerInfo.getCustomerPassword());
+        bundle.putString("orderstatus",CustomerInfo.getorderStatus());
+        bundle.putStringArrayList("merchandise",CustomerInfo.getMerchandise());
+        bundle.putString("money",CustomerInfo.getMoney().toString());
+        bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
+    }
+
+
 }

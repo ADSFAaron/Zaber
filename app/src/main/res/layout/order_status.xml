@@ -107,6 +107,7 @@
                         android:gravity="left"/>
 
                     <TextView
+                        android:id="@+id/money"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="$ 800"
@@ -129,6 +130,7 @@
                         android:textSize="24dp"/>
 
                     <TextView
+                        android:id="@+id/number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="10"
@@ -150,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/login_btn"
-        android:text="聯絡店家"
+        android:text="回首頁"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 

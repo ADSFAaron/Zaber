@@ -73,13 +73,15 @@
             android:layout_marginVertical="10sp">
 
         <CheckBox
+            android:id="@+id/ceckbox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:onClick="itemClicked"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加飯"/>
+            android:text="加量"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "969237466540",
+    "project_id": "interact-final",
+    "storage_bucket": "interact-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969237466540:android:3a3dcb498106d623d9fe09",
+        "android_client_info": {
+          "package_name": "com.example.zaber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969237466540-7varrqq6nfpcprlk0vkth8dpk3a23cbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV3-OXEoJsvHJB49X2jlopVKWBgp1x2Yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969237466540-7varrqq6nfpcprlk0vkth8dpk3a23cbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
