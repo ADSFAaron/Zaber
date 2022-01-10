@@ -10,18 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.StoreOrderViewHolder> {
 
     ArrayList<String[]> orderItems;
+    ArrayList<Order> order;
     String user;
     Context context;
     int currentNo;
 
-    public StoreOrderAdapter(Context context, ArrayList<String[]> orderItems, String user) {
+    public StoreOrderAdapter(Context context, ArrayList<String[]> orderItems, String user , ArrayList<Order> order) {
         this.orderItems = orderItems;
         this.user = user;
+        this.order = order;
         this.context = context;
 
         currentNo = 1;
@@ -56,7 +61,7 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
     public int getItemCount() {
         return orderItems.size();
     }
-
+    public Order getOrder(int pos){return order.get(pos); };
 
     public class StoreOrderViewHolder extends RecyclerView.ViewHolder {
 
@@ -77,15 +82,22 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
             order_complete.setOnClickListener(view -> {
                 System.out.println("Remove Index: " + getAbsoluteAdapterPosition());
                 System.out.println("Remove Index: " + getBindingAdapterPosition());
+                removeOrder(getAbsoluteAdapterPosition());
                 adapter.orderItems.remove(getAbsoluteAdapterPosition());
                 adapter.notifyItemRemoved(getAbsoluteAdapterPosition());
-
             });
         }
 
         public StoreOrderViewHolder linkAdapter(StoreOrderAdapter adapter) {
             this.adapter = adapter;
             return this;
+        }
+
+        public void removeOrder(int pos){
+            DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+            Order od = getOrder(pos);
+            root.child("store").child(od.getUser()).setValue(od);
+            //root.child("users").child(od.getUser()).removeValue();
         }
     }
 }

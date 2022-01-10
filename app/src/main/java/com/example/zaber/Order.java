@@ -21,4 +21,23 @@ public class Order {
         this.placeOrderTime = placeOrderTime;
         this.status = status;
     }
+    public int getNo() {
+        return no;
+    }
+    public String getUser() {
+        return user;
+    }
+
+
+    public int getTotal() {
+        return total;
+    }
+
+    public Date getPlaceOrderTime() {
+        return placeOrderTime;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
 }
