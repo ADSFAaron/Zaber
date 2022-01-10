@@ -6,4 +6,20 @@
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="open_time">營業時間</string>
+    <string name="edit_open_time">Edit Open Time</string>
+    <string name="order_history">歷史訂單</string>
+    <string name="voice_hint">語音提示</string>
+    <string name="store_open">開始營業</string>
+    <string name="edit_store">編輯店家資料</string>
+    <string name="today_take_day_off">本日公休</string>
+    <string name="store_close">結束接單</string>
+    <string name="store_online">上線中</string>
+    <string name="order_delay_time">延長時間</string>
+    <string name="order_complete">完成訂單</string>
+    <string name="multiple_page_change">Multiple Page Change</string>
+    <string name="in_progress">製作中</string>
+    <string name="decline">拒絕</string>
+    <string name="accept">接受</string>
+    <string name="new_order">新訂單</string>
 </resources>

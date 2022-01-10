@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class StoreItemActivity extends AppCompatActivity{
+public class StoreItemActivity extends AppCompatActivity {
     Button shopping_cart_btn;
 
     ListView lv;
@@ -22,20 +22,22 @@ public class StoreItemActivity extends AppCompatActivity{
     //ArrayList proglist;
 
     public static Integer[] progImages = {
-            R.drawable.store_image,R.drawable.store_image,R.drawable.store_image,R.drawable.store_image,R.drawable.store_image
+            R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image
     };
 
     public static String[] progNames = {
-            "StoreItem1","StoreItem2","StoreItem3","StoreItem4","StoreItem5"
+            "StoreItem1", "StoreItem2", "StoreItem3", "StoreItem4", "StoreItem5"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_store);
+
         bundle=getIntent().getBundleExtra("bundle");
         Log.d("SSSSSSSSSSSS::::", getIntent().getBundleExtra("bundle").getString("orderstatus"));
         StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages);
+
 
         store_name=findViewById(R.id.store_name);
         store_name.setText(bundle.get("orderstatus").toString());

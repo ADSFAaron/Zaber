@@ -22,9 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import java.util.Objects;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,12 +50,34 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.login_password);
         login_btn = findViewById(R.id.login_btn);
 
-        login_btn.setOnClickListener(customer_menu);
-
-        // Validation
 
         // Redirection customer or store
-    }
+        login_btn.setOnClickListener(view -> {
+            String mail = Objects.requireNonNull(email.getText()).toString(), pw = Objects.requireNonNull(password.getText()).toString();
+            System.out.println("Mail: " + mail);
+            System.out.println("Password: " + pw);
+
+            // After Onclick
+            if (!mail.isEmpty() && !pw.isEmpty()) {
+                Intent intent = null;
+
+                // Switch Account
+                if (mail.equals("customer@a.com")) {
+                    System.out.println("Customer Account");
+                    intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                } else if (mail.equals("store@a.com")) {
+                    System.out.println("Store Account");
+                    intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+                } else {
+                    System.out.println("Error Account : " + mail);
+                }
+
+                startActivity(intent);
+                finish();
+            }
+
+        });
+
 
 //    Log.i("customerEmail.........", dataSnapshot.child("customerEmail").getValue(String.class));
 //    if(CustomerInfo.getCustomerEmail().equals(dataSnapshot.child("customerEmail").getValue(String.class)))
@@ -106,5 +132,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     };
-
 }
