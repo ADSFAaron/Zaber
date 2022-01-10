@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView loginTab, registerTab;
     TextInputEditText email, password;
     Button login_btn;
-    Bundle bundle=new Bundle();
-    CustomerInformation CustomerInfo=new CustomerInformation();
+    Bundle bundle = new Bundle();
+    CustomerInformation CustomerInfo = new CustomerInformation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +60,10 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("Customer Account");
                 CustomerInfo.setCustomerEmail(email.getEditableText().toString());
                 CustomerInfo.setCustomerPassword(password.getEditableText().toString());
-                intent = new Intent(LoginActivity.this, CustomerActivity.class);
+//                intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
                 logins();
-                intent.putExtra("bundle",bundle);
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
                 finish();
                 // Switch Account
@@ -85,30 +86,31 @@ public class LoginActivity extends AppCompatActivity {
 //                    System.out.println("Error Account : " + mail);
 //                }
 
-            }
-            else{
+            } else {
                 Toast.makeText(LoginActivity.this, "Can place Empty!!!", Toast.LENGTH_SHORT).show();
             }
 
         });
     }
-//    Log.i("customerEmail.........", dataSnapshot.child("customerEmail").getValue(String.class));
+
+    //    Log.i("customerEmail.........", dataSnapshot.child("customerEmail").getValue(String.class));
 //    if(CustomerInfo.getCustomerEmail().equals(dataSnapshot.child("customerEmail").getValue(String.class)))
 //        Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
 //    else
 //        transitions();
-    private void addDatatoFirebase(){
-        String emailName=CustomerInfo.getCustomerEmail();
-        if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
-            emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
+    private void addDatatoFirebase() {
+        String emailName = CustomerInfo.getCustomerEmail();
+        if (CustomerInfo.getCustomerEmail().indexOf(".") != -1)
+            emailName = CustomerInfo.getCustomerEmail().substring(0, CustomerInfo.getCustomerEmail().indexOf("."));
         System.out.println("Account verify : " + emailName);
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference targetRef=root.child("users").child(emailName);
+        DatabaseReference targetRef = root.child("users").child(emailName);
         targetRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 logins();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w("TAG", "onCancelled", databaseError.toException());
@@ -116,15 +118,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void logins(){
+    public void logins() {
 //        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
 //        root.child("users").child(CustomerInfo.getCustomerEmail()).setValue(CustomerInfo);
-        bundle.putString("email",CustomerInfo.getCustomerEmail());
-        bundle.putString("pwd",CustomerInfo.getCustomerPassword());
-        bundle.putString("orderstatus",CustomerInfo.getorderStatus());
-        bundle.putStringArrayList("merchandise",CustomerInfo.getMerchandise());
-        bundle.putString("money",CustomerInfo.getMoney().toString());
-        bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
+        bundle.putString("email", CustomerInfo.getCustomerEmail());
+        bundle.putString("pwd", CustomerInfo.getCustomerPassword());
+        bundle.putString("orderstatus", CustomerInfo.getorderStatus());
+        bundle.putStringArrayList("merchandise", CustomerInfo.getMerchandise());
+        bundle.putString("money", CustomerInfo.getMoney().toString());
+        bundle.putStringArrayList("singleItemALL", new ArrayList<String>());
     }
 
 

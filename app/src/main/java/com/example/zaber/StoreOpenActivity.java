@@ -42,11 +42,6 @@ public class StoreOpenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Set Button Click
-        store_online_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        store_online_close.setOnClickListener(view -> finish());
     }
 }
