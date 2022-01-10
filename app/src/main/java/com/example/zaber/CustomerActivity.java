@@ -22,11 +22,11 @@ public class CustomerActivity extends AppCompatActivity {
     Bundle bundle;
 
     public static Integer[] progImages = {
-            R.drawable.store_image,R.drawable.store_image,R.drawable.store_image,R.drawable.store_image,R.drawable.store_image
+            R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image
     };
 
     public static String[] progNames = {
-            "Store1","Store2","Store3","Store4","Store5"
+            "Store1", "Store2", "Store3", "Store4", "Store5"
     };
 
     @Override
