@@ -61,39 +61,47 @@ public class LoginActivity extends AppCompatActivity {
                 // Switch Account
                 if (mail.equals("customer@a.com")) {
                     System.out.println("Customer Account");
+                    CustomerInfo.setCustomerEmail(email.getEditableText().toString());
+                    CustomerInfo.setCustomerPassword(password.getEditableText().toString());
                     intent = new Intent(LoginActivity.this, CustomerActivity.class);
+                    logins();
+                    intent.putExtra("bundle",bundle);
+                    startActivity(intent);
+                    finish();
                 } else if (mail.equals("store@a.com")) {
                     System.out.println("Store Account");
                     intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
+                    Toast.makeText(LoginActivity.this, "Error Account : " + mail, Toast.LENGTH_SHORT).show();
                     System.out.println("Error Account : " + mail);
                 }
 
-                startActivity(intent);
-                finish();
+            }
+            else{
+                Toast.makeText(LoginActivity.this, "Can place Empty!!!", Toast.LENGTH_SHORT).show();
             }
 
         });
-
+    }
 //    Log.i("customerEmail.........", dataSnapshot.child("customerEmail").getValue(String.class));
 //    if(CustomerInfo.getCustomerEmail().equals(dataSnapshot.child("customerEmail").getValue(String.class)))
 //        Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
 //    else
 //        transitions();
     private void addDatatoFirebase(){
+        String emailName=CustomerInfo.getCustomerEmail();
+        if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
+            emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
+        System.out.println("Account verify : " + emailName);
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference targetRef=root.child("users").child(CustomerInfo.getCustomerEmail());
+        DatabaseReference targetRef=root.child("users").child(emailName);
         targetRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-            logins();
-//                if(dataSnapshot.exists()){
-//                    Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
-//                }
-//                else
-//                    logins();
+                logins();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w("TAG", "onCancelled", databaseError.toException());
@@ -109,23 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("orderstatus",CustomerInfo.getorderStatus());
         bundle.putStringArrayList("merchandise",CustomerInfo.getMerchandise());
         bundle.putString("money",CustomerInfo.getMoney().toString());
-
-        Intent intent = new Intent(LoginActivity.this, CustomerActivity.class);
-        intent.putExtra("bundle",bundle);
-        startActivity(intent);
-        finish();
     }
 
-    private View.OnClickListener customer_menu = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(email.getEditableText().toString().equals("")||password.getEditableText().toString().equals(""))
-                Toast.makeText(LoginActivity.this, "Can place Empty!!!", Toast.LENGTH_SHORT).show();
-            else{
-                CustomerInfo.setCustomerEmail(email.getEditableText().toString());
-                CustomerInfo.setCustomerPassword(password.getEditableText().toString());
-                addDatatoFirebase();
-            }
-        }
-    };
+
 }

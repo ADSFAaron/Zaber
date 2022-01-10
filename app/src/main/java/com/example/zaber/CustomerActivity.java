@@ -36,7 +36,10 @@ public class CustomerActivity extends AppCompatActivity {
 
         bundle=getIntent().getBundleExtra("bundle");
         welcome=(TextView)findViewById(R.id.welcome_msg);
-        welcome.setText("歡迎回來, "+bundle.get("email"));
+        String emailName=bundle.get("email").toString();
+        if(emailName.indexOf("@")!=-1)
+            emailName=emailName.substring(0,emailName.indexOf("@"));
+        welcome.setText("歡迎回來, "+emailName);
 
         StoreListAdapter adapter = new StoreListAdapter(this,progNames,progImages);
 

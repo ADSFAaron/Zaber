@@ -40,7 +40,7 @@ public class OrderCheckActivity extends AppCompatActivity {
         ShoppingListAdapter adapter = new ShoppingListAdapter(this,itemList.toArray(new String[0]));
 
         money=findViewById(R.id.money);
-        money.setText(bundle.get("money").toString());
+        money.setText(bundle.get("money").toString()+"元");
 
         order_confirm_btn = findViewById(R.id.order_confirm_btn);
         lv = (ListView) findViewById(R.id.order_list);
@@ -62,7 +62,12 @@ public class OrderCheckActivity extends AppCompatActivity {
             CustomerInfo.setMerchandise(bundle.getStringArrayList("merchandise"));
             CustomerInfo.setMoney(Integer.parseInt(bundle.get("money").toString()));
             CustomerInfo.setNumber(rand.nextInt(101));
-            root.child("users").child(CustomerInfo.getCustomerEmail()).setValue(CustomerInfo);
+            String emailName=CustomerInfo.getCustomerEmail();
+            if(CustomerInfo.getCustomerEmail().indexOf(".")!=-1)
+                emailName=CustomerInfo.getCustomerEmail().substring(0,CustomerInfo.getCustomerEmail().indexOf("."));
+
+            // add to database
+            root.child("users").child(emailName).setValue(CustomerInfo);
 
             Intent intent = new Intent(OrderCheckActivity.this, OrderStatusActivity.class);
             bundle.putString("money",CustomerInfo.getMoney().toString());
