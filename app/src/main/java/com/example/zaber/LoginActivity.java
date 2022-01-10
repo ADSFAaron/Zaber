@@ -116,6 +116,4 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("money", CustomerInfo.getMoney().toString());
         bundle.putStringArrayList("singleItemALL", new ArrayList<String>());
     }
-
-
 }
