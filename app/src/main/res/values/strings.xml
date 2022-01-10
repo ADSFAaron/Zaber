@@ -22,4 +22,6 @@
     <string name="decline">拒絕</string>
     <string name="accept">接受</string>
     <string name="new_order">新訂單</string>
+    <string name="history_order">歷史訂單</string>
+    <string name="order_detail">詳細資訊</string>
 </resources>
