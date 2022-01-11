@@ -36,9 +36,9 @@ public class HistoryOrderAdapter extends RecyclerView.Adapter<HistoryOrderAdapte
         Order order = orderItems.get(position);
         StringBuilder orderText = new StringBuilder();
         String showNo = "No." + order.no;
-        String[] orderItem = order.items;
-        for (int i = 0, orderItemLength = orderItem.length; i < orderItemLength; i++) {
-            String s = orderItem[i];
+        ArrayList<String> orderItem = order.items;
+        for (int i = 0, orderItemLength = orderItem.size(); i < orderItemLength; i++) {
+            String s = orderItem.get(i);
             orderText.append(i + 1).append(". ").append(s).append("\n");
         }
 

@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -130,7 +131,8 @@ public class StoreOpenActivity extends AppCompatActivity {
 
         popupAccept.setOnClickListener(view -> {
             // 按下 Accept 後
-            _order.add(new Order(no, "user", tmp, tmp, 100, currentLocalTime, OrderStatus.New));
+
+            _order.add(new Order(no, "user", new ArrayList<String>(Arrays.asList(tmp)), new ArrayList<String>(Arrays.asList(tmp)), 100, currentLocalTime, OrderStatus.New));
             alertDialog.dismiss();
         });
 
@@ -169,7 +171,7 @@ public class StoreOpenActivity extends AppCompatActivity {
             orderList.add(mStringArray);
             OrderStatus test = OrderStatus.New;
             Calendar c = Calendar.getInstance();
-            Order newOD = new Order(ci.getNumber(),ci.getCustomerEmail(),mStringArray,mStringArray,ci.getMoney(),c.getTime(),test);
+            Order newOD = new Order(ci.getNumber(),ci.getCustomerEmail(),ci.getMerchandise(),ci.getMerchandise(),ci.getMoney(),c.getTime(),test);
 
             order.add(newOD);
         }
