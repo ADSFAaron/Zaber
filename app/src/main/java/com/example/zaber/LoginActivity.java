@@ -58,17 +58,16 @@ public class LoginActivity extends AppCompatActivity {
             if (!mail.isEmpty() && !pw.isEmpty()) {
                 Intent intent = null;
                 // Switch Account
-                if (mail.indexOf("!")==-1) {
+                if (mail.indexOf("!") == -1) {
                     System.out.println("Customer Account");
                     CustomerInfo.setCustomerEmail(email.getEditableText().toString());
                     CustomerInfo.setCustomerPassword(password.getEditableText().toString());
                     intent = new Intent(LoginActivity.this, CustomerActivity.class);
                     logins();
-                    intent.putExtra("bundle",bundle);
+                    intent.putExtra("bundle", bundle);
                     startActivity(intent);
 //                    finish();
-                }
-                else{
+                } else {
                     System.out.println("Store Account");
                     intent = new Intent(LoginActivity.this, StoreHomeActivity.class);
                     startActivity(intent);
@@ -87,25 +86,25 @@ public class LoginActivity extends AppCompatActivity {
 //        Toast.makeText(LoginActivity.this, "already exist", Toast.LENGTH_SHORT).show();
 //    else
 //        transitions();
-    private void addDatatoFirebase() {
-        String emailName = CustomerInfo.getCustomerEmail();
-        if (CustomerInfo.getCustomerEmail().indexOf(".") != -1)
-            emailName = CustomerInfo.getCustomerEmail().substring(0, CustomerInfo.getCustomerEmail().indexOf("."));
-        System.out.println("Account verify : " + emailName);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference targetRef = root.child("users").child(emailName);
-        targetRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                logins();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG", "onCancelled", databaseError.toException());
-            }
-        });
-    }
+//    private void addDatatoFirebase() {
+//        String emailName = CustomerInfo.getCustomerEmail();
+//        if (CustomerInfo.getCustomerEmail().indexOf(".") != -1)
+//            emailName = CustomerInfo.getCustomerEmail().substring(0, CustomerInfo.getCustomerEmail().indexOf("."));
+//        System.out.println("Account verify : " + emailName);
+//        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference targetRef = root.child("users").child(emailName);
+//        targetRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                logins();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.w("TAG", "onCancelled", databaseError.toException());
+//            }
+//        });
+//    }
 
     public void logins() {
 //        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
@@ -117,6 +116,4 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("money", CustomerInfo.getMoney().toString());
         bundle.putStringArrayList("singleItemALL", new ArrayList<String>());
     }
-
-
 }
