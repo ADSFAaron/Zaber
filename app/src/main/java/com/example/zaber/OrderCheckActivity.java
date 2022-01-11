@@ -61,10 +61,28 @@ public class OrderCheckActivity extends AppCompatActivity {
         times.setText(currentTime.toString()+"~"+left.toString()+":"+right.toString());
         order_confirm_btn = findViewById(R.id.order_confirm_btn);
         lv = (ListView) findViewById(R.id.order_list);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(OrderCheckActivity.this, OrderCheckActivity.class);
+                ArrayList<String> items=bundle.getStringArrayList("merchandise");
+                ArrayList<String> prices=bundle.getStringArrayList("singleItemALL");
+                String money=bundle.get("money").toString();
+                String current=prices.get(position);
+                prices.remove(position);
+                items.remove(position);
+                bundle.putStringArrayList("merchandise",items);
+                bundle.putStringArrayList("singleItemALL",prices);
+                bundle.putString("money",Integer.toString(Integer.parseInt(money)-Integer.parseInt(current)));
 
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
         order_confirm_btn.setOnClickListener(order_confirm);
 
-        lv.setAdapter(adapter);
     }
 
     private View.OnClickListener order_confirm = new View.OnClickListener() {

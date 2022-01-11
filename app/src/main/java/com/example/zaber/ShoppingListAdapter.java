@@ -32,7 +32,7 @@ public class ShoppingListAdapter extends ArrayAdapter<String>{
         //ImageView imageView = (ImageView) rowView.findViewById(R.id.);
 
         textView.setText(progNames[position]);
-        textView1.setText(progMoney[position]);
+        textView1.setText("$"+progMoney[position]);
         //imageView.setImageResource(progImages[position]);
 
         return  rowView;

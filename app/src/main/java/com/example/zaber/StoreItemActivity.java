@@ -72,8 +72,10 @@ public class StoreItemActivity extends AppCompatActivity {
     public void setCardInfo(){
         String stores=bundle.get("orderstatus").toString();
         if(stores.equals("陽光麵食")){
-            progNames= new String[]{"滷肉飯", "牛肉燴飯", "羊肉炒飯", "擔仔麵", "酸辣意麵"};
+            progNames= new String[]{"滷肉飯", "羊肉燴飯", "牛肉炒飯", "擔仔麵", "酸辣意麵"};
             progmoney= new String[]{"45", "65", "65", "55", "50"};
+            progImages= new Integer[]{R.mipmap.ic_rice_foreground,R.mipmap.ic_sleep_rice_foreground,R.mipmap.ic_beef_rice_foreground,R.mipmap.ic_noodle_foreground,R.mipmap.ic_odd_noodle_foreground};
+
         }
         else if(stores.equals("冰窖水果部")){
             progNames= new String[]{"紅茶", "檸檬愛玉", "抹茶奶茶", "烏龍奶茶", "青蛙下蛋"};
