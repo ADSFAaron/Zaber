@@ -42,6 +42,10 @@ public class StoreOpenActivity extends AppCompatActivity {
     private ArrayList<String[]> orderList;
     private ArrayList<Order> order;
     private StoreOrderAdapter storeOrderAdapter;
+
+    private Boolean popUpOption = false;
+    private CustomerInformation currOrder;
+    private DatabaseReference root;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +62,7 @@ public class StoreOpenActivity extends AppCompatActivity {
         customerInformList = new ArrayList<>();
 
         // Get user's order
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("users");
+        root = FirebaseDatabase.getInstance().getReference().child("users");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,7 +77,7 @@ public class StoreOpenActivity extends AppCompatActivity {
                 }
                 createOrderList();
                 storeOrderAdapter.notifyDataSetChanged();
-
+                root.removeEventListener(this);/**/
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -86,27 +90,26 @@ public class StoreOpenActivity extends AppCompatActivity {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
-                CustomerInformation NewCI = dataSnapshot.getValue(CustomerInformation.class);
-                createNewOrderDialog(NewCI);
+                if(orderList.size() > 0){
+                    Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
+                    currOrder = dataSnapshot.getValue(CustomerInformation.class);
+                    createNewOrderDialog(currOrder);
+                    /*if(!popUpOption)
+                        root.child(dataSnapshot.getKey()).removeValue();*/
+                }
             }
-
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
-            }
-
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) { }
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) { }
-
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) { }
-
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         };
         root.addValueEventListener(postListener);
         root.addChildEventListener(childEventListener);
+        
 /*
         String[] testOrder1 = {"餐點一", "餐點二", "餐點三"};
         String[] testOrder2 = {"餐點一", "餐點二"};
@@ -159,12 +162,18 @@ public class StoreOpenActivity extends AppCompatActivity {
 
         popupAccept.setOnClickListener(view -> {
             // 按下 Accept 後
-
+            popUpOption = true;
+            // Add new order to the list
+            customerInformList.add(currOrder);
+            createOrderList();
+            storeOrderAdapter.notifyDataSetChanged();
             _order.add(new Order(no, "user", new ArrayList<String>(Arrays.asList(tmp)), new ArrayList<String>(Arrays.asList(tmp)), 100, currentLocalTime, OrderStatus.New));
             alertDialog.dismiss();
         });
 
         popupDecline.setOnClickListener(view -> {
+            popUpOption = false;
+            root.child(currOrder.getCustomerEmail()).removeValue();
             alertDialog.dismiss();
         });
     }
@@ -193,14 +202,17 @@ public class StoreOpenActivity extends AppCompatActivity {
     }
 
     public void createOrderList(){
+        orderList.clear();
+        order.clear();
+
         for(CustomerInformation ci : customerInformList){
             String[] mStringArray = new String[ci.getMerchandise().size()];
             mStringArray = ci.getMerchandise().toArray(mStringArray);
             orderList.add(mStringArray);
+
             OrderStatus test = OrderStatus.New;
             Calendar c = Calendar.getInstance();
             Order newOD = new Order(ci.getNumber(),ci.getCustomerEmail(),ci.getMerchandise(),ci.getMerchandise(),ci.getMoney(),c.getTime(),test);
-
             order.add(newOD);
         }
     }
