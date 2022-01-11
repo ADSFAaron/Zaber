@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,6 +62,7 @@ public class StoreOpenActivity extends AppCompatActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                int originalSize = customerInformList.size();
                 customerInformList.clear();
                 orderList.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -71,6 +73,7 @@ public class StoreOpenActivity extends AppCompatActivity {
                 }
                 createOrderList();
                 storeOrderAdapter.notifyDataSetChanged();
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -78,7 +81,32 @@ public class StoreOpenActivity extends AppCompatActivity {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         };
+
+
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
+                CustomerInformation NewCI = dataSnapshot.getValue(CustomerInformation.class);
+                createNewOrderDialog(NewCI);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        };
         root.addValueEventListener(postListener);
+        root.addChildEventListener(childEventListener);
 /*
         String[] testOrder1 = {"餐點一", "餐點二", "餐點三"};
         String[] testOrder2 = {"餐點一", "餐點二"};
@@ -95,10 +123,10 @@ public class StoreOpenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Set Button Click
-        store_online_close.setOnClickListener(view -> createNewOrderDialog());
+        //store_online_close.setOnClickListener(view -> createNewOrderDialog());
     }
 
-    public void createNewOrderDialog() {
+    public void createNewOrderDialog(CustomerInformation NewCI) {
         dialogBuilder = new AlertDialog.Builder(this);
         final View popupView = getLayoutInflater().inflate(R.layout.new_order_row, null);
 
@@ -110,11 +138,11 @@ public class StoreOpenActivity extends AppCompatActivity {
         popupDecline = popupView.findViewById(R.id.order_decline);
 
         int no = 123;
-        String showNo = "No. " + no;
+        String showNo = "No. " + NewCI.getNumber();
         String[] tmp = {"起司玉米蛋餅", "鬼椒牛肉起司堡"};
         StringBuilder sb = new StringBuilder();
-        for (int i = 0, orderItemLength = tmp.length; i < orderItemLength; i++) {
-            String s = tmp[i];
+        for (int i = 0;i < NewCI.getMerchandise().size(); i++) {
+            String s = NewCI.getMerchandise().get(i);
             sb.append(i + 1).append(". ").append(s).append("\n");
         }
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
