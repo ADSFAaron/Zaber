@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toStartOf="@id/item_image"
         android:id="@+id/item_description"
         app:layout_constraintHorizontal_weight="5"
-        android:text="商品材料."
+        android:text=""
         android:textSize="20dp" />
 
     <ImageView

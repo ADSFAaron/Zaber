@@ -45,7 +45,13 @@ public class OrderStatusActivity extends AppCompatActivity {
         }
         if(left/24==1)
             left%=24;
-        times.setText(currentTime.toString()+"~"+left.toString()+":"+right.toString());
+        String left_s=left.toString();
+        if(left<10)
+            left_s="0"+left_s;
+        String right_s=right.toString();
+        if(right<10)
+            right_s="0"+right_s;
+        times.setText(currentTime.toString()+"~"+left_s+":"+right_s);
 
     }
 

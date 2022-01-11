@@ -39,7 +39,7 @@ public class CustomerActivity extends AppCompatActivity {
         String emailName=bundle.get("email").toString();
         if(emailName.indexOf("@")!=-1)
             emailName=emailName.substring(0,emailName.indexOf("@"));
-        welcome.setText("    歡迎回來, "+emailName);
+        welcome.setText("歡迎回來, "+emailName);
 
         StoreListAdapter adapter = new StoreListAdapter(this,progNames,progImages);
 

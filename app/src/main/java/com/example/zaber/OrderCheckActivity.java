@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,6 +27,10 @@ public class OrderCheckActivity extends AppCompatActivity {
     ListView lv;
     Bundle bundle;
     TextView money,times;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog alertDialog;
+    private AppCompatButton popupAccept, popupDecline;
+    public int positions;
     CustomerInformation CustomerInfo=new CustomerInformation();
 
     public static String[] progNames = {
@@ -39,7 +45,7 @@ public class OrderCheckActivity extends AppCompatActivity {
         ArrayList<String> itemList=bundle.getStringArrayList("merchandise");
         ArrayList<String> moneyList=bundle.getStringArrayList("singleItemALL");
 
-//        Log.d("bundle !!!!!!", bundle.getStringArrayList("merchandise").toString());
+        Log.d("bundle !!!!!!", bundle.getStringArrayList("merchandise").toString());
 
         ShoppingListAdapter adapter = new ShoppingListAdapter(this,itemList.toArray(new String[0]),moneyList.toArray(new String[0]));
 
@@ -58,33 +64,72 @@ public class OrderCheckActivity extends AppCompatActivity {
         }
         if(left/24==1)
             left%=24;
-        times.setText(currentTime.toString()+"~"+left.toString()+":"+right.toString());
+        String left_s=left.toString();
+        if(left<10)
+            left_s="0"+left_s;
+        String right_s=right.toString();
+        if(right<10)
+            right_s="0"+right_s;
+        times.setText(currentTime.toString()+"~"+left_s+":"+right_s);
         order_confirm_btn = findViewById(R.id.order_confirm_btn);
         lv = (ListView) findViewById(R.id.order_list);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(OrderCheckActivity.this, OrderCheckActivity.class);
-                ArrayList<String> items=bundle.getStringArrayList("merchandise");
-                ArrayList<String> prices=bundle.getStringArrayList("singleItemALL");
-                String money=bundle.get("money").toString();
-                String current=prices.get(position);
-                prices.remove(position);
-                items.remove(position);
-                bundle.putStringArrayList("merchandise",items);
-                bundle.putStringArrayList("singleItemALL",prices);
-                bundle.putString("money",Integer.toString(Integer.parseInt(money)-Integer.parseInt(current)));
+                positions=position;
+                dialogBuilder = new AlertDialog.Builder(OrderCheckActivity.this);
+                final View popupView = getLayoutInflater().inflate(R.layout.new_order_row, null);
+                popupAccept = popupView.findViewById(R.id.order_accept);
+                popupDecline = popupView.findViewById(R.id.order_decline);
+                popupAccept.setText("確定");
+                popupDecline.setText("取消");
+                TextView orderNo = popupView.findViewById(R.id.order_no);
+                TextView orderState = popupView.findViewById(R.id.order_status);
+                TextView orderItems = popupView.findViewById(R.id.order_item);
+                orderNo.setText("是否取消餐點");
+                orderState.setText("");
 
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
-                finish();
+                orderItems.setText(bundle.getStringArrayList("merchandise").get(position));
+                dialogBuilder.setView(popupView);
+                alertDialog = dialogBuilder.create();
+                alertDialog.show();
+                popupAccept.setOnClickListener(btn1Listener);
+                popupDecline.setOnClickListener(btn2Listener);
             }
         });
         order_confirm_btn.setOnClickListener(order_confirm);
 
     }
+    private Button.OnClickListener btn1Listener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            alertDialog.dismiss();
+            Intent intent = new Intent(OrderCheckActivity.this, OrderCheckActivity.class);
+            ArrayList<String> items=bundle.getStringArrayList("merchandise");
+            ArrayList<String> prices=bundle.getStringArrayList("singleItemALL");
+            String money=bundle.get("money").toString();
+            String current=prices.get(positions);
+            prices.remove(positions);
+            items.remove(positions);
+            bundle.putStringArrayList("merchandise",items);
+            bundle.putStringArrayList("singleItemALL",prices);
+            bundle.putString("money",Integer.toString(Integer.parseInt(money)-Integer.parseInt(current)));
 
+            intent.putExtra("bundle",bundle);
+            startActivity(intent);
+
+//            finish();
+        }
+    };
+    private Button.OnClickListener btn2Listener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            alertDialog.dismiss();
+        }
+    };
     private View.OnClickListener order_confirm = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

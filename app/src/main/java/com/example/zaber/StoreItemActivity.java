@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class StoreItemActivity extends AppCompatActivity {
-    Button shopping_cart_btn;
+    Button shopping_cart_btn,store_exit;
 
     ListView lv;
     Context context;
@@ -42,7 +42,7 @@ public class StoreItemActivity extends AppCompatActivity {
         bundle=getIntent().getBundleExtra("bundle");
         setCardInfo();
         StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages,progmoney);
-
+        store_exit=findViewById(R.id.store_close);
         store_name=findViewById(R.id.store_name);
         store_name.setText(bundle.get("orderstatus").toString());
 
@@ -62,6 +62,20 @@ public class StoreItemActivity extends AppCompatActivity {
                 bundle.putString("item",progNames[index]);
                 bundle.putString("singleMoney",progmoney[index]);
                 bundle.putStringArrayList("singleItemALL",req);
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
+        store_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StoreItemActivity.this, CustomerActivity.class);
+                bundle.putString("item","");
+                bundle.putString("orderstatus","false");
+                bundle.putString("money","0");
+                bundle.putStringArrayList("merchandise",new ArrayList<String>());
+                bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
                 intent.putExtra("bundle",bundle);
                 startActivity(intent);
                 finish();
