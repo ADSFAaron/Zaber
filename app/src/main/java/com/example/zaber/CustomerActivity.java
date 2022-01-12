@@ -22,7 +22,7 @@ public class CustomerActivity extends AppCompatActivity {
     Bundle bundle;
 
     public static Integer[] progImages = {
-            R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image, R.drawable.store_image
+            R.mipmap.ic_chicken_store_foreground, R.mipmap.ic_sun_store_foreground, R.mipmap.ic_drink_store_foreground, R.mipmap.ic_mountain_store_foreground, R.mipmap.ic_dumpling_store_foreground
     };
 
     public static String[] progNames = {
@@ -39,7 +39,7 @@ public class CustomerActivity extends AppCompatActivity {
         String emailName=bundle.get("email").toString();
         if(emailName.indexOf("@")!=-1)
             emailName=emailName.substring(0,emailName.indexOf("@"));
-        welcome.setText("    歡迎回來, "+emailName);
+        welcome.setText("歡迎回來, "+emailName);
 
         StoreListAdapter adapter = new StoreListAdapter(this,progNames,progImages);
 

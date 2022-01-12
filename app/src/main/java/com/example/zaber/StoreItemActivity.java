@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class StoreItemActivity extends AppCompatActivity {
-    Button shopping_cart_btn;
+    Button shopping_cart_btn,store_exit;
 
     ListView lv;
     Context context;
@@ -42,7 +42,7 @@ public class StoreItemActivity extends AppCompatActivity {
         bundle=getIntent().getBundleExtra("bundle");
         setCardInfo();
         StoreItemListAdapter adapter = new StoreItemListAdapter(this,progNames,progImages,progmoney);
-
+        store_exit=findViewById(R.id.store_close);
         store_name=findViewById(R.id.store_name);
         store_name.setText(bundle.get("orderstatus").toString());
 
@@ -67,13 +67,29 @@ public class StoreItemActivity extends AppCompatActivity {
                 finish();
             }
         });
+        store_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StoreItemActivity.this, CustomerActivity.class);
+                bundle.putString("item","");
+                bundle.putString("orderstatus","false");
+                bundle.putString("money","0");
+                bundle.putStringArrayList("merchandise",new ArrayList<String>());
+                bundle.putStringArrayList("singleItemALL",new ArrayList<String>());
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void setCardInfo(){
         String stores=bundle.get("orderstatus").toString();
         if(stores.equals("陽光麵食")){
-            progNames= new String[]{"滷肉飯", "牛肉燴飯", "羊肉炒飯", "擔仔麵", "酸辣意麵"};
+            progNames= new String[]{"滷肉飯", "羊肉燴飯", "牛肉炒飯", "擔仔麵", "酸辣意麵"};
             progmoney= new String[]{"45", "65", "65", "55", "50"};
+            progImages= new Integer[]{R.mipmap.ic_rice_foreground,R.mipmap.ic_sleep_rice_foreground,R.mipmap.ic_beef_rice_foreground,R.mipmap.ic_noodle_foreground,R.mipmap.ic_odd_noodle_foreground};
+
         }
         else if(stores.equals("冰窖水果部")){
             progNames= new String[]{"紅茶", "檸檬愛玉", "抹茶奶茶", "烏龍奶茶", "青蛙下蛋"};
