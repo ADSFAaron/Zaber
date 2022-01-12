@@ -18,7 +18,7 @@ public class OrderActivity extends AppCompatActivity{
 
     Button order_btn;
     Bundle bundle;
-    TextView item_name;
+    TextView item_name,item_description;
     String addmore="";
 
     @Override
@@ -29,7 +29,7 @@ public class OrderActivity extends AppCompatActivity{
         order_btn = findViewById(R.id.shopping_cart_btn);
         item_name=findViewById(R.id.item_name);
         item_name.setText(bundle.get("item").toString());
-
+        item_description=findViewById(R.id.item_description);
         order_btn.setOnClickListener(order_this);
     }
     public void itemClicked(View v) {
@@ -45,7 +45,7 @@ public class OrderActivity extends AppCompatActivity{
         public void onClick(View v) {
             //Do something
             Intent intent = new Intent(OrderActivity.this, StoreItemActivity.class);
-            updateBundle(item_name.getText().toString()+addmore);
+            updateBundle(item_name.getText().toString()+addmore+" "+item_description.getText().toString());
             intent.putExtra("bundle",bundle);
             startActivity(intent);
 //            finish();
