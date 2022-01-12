@@ -5,11 +5,17 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -62,6 +68,21 @@ public class StoreHomeActivity extends AppCompatActivity {
             Intent intent = new Intent(StoreHomeActivity.this, AudioChooseActivity.class);
             startActivity(intent);
         });
+
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("store");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.v(dataSnapshot.getKey(), dataSnapshot.getChildrenCount() + "");
+                order_history_all.setText(dataSnapshot.getChildrenCount()+" "+"筆訂單");
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        root.addValueEventListener(postListener);
 
     }
 
