@@ -46,6 +46,7 @@ public class StoreOpenActivity extends AppCompatActivity {
     private Boolean popUpOption = false;
     private CustomerInformation currOrder;
     private DatabaseReference root;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,16 +70,17 @@ public class StoreOpenActivity extends AppCompatActivity {
                 int originalSize = customerInformList.size();
                 customerInformList.clear();
                 orderList.clear();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //Log.v("DATABASE",ds.getValue().toString());
-                    CustomerInformation customer_data =ds.getValue(CustomerInformation.class);
-                    if(customer_data.getorderStatus().equals("仙桃總鋪"))
+                    CustomerInformation customer_data = ds.getValue(CustomerInformation.class);
+                    if (customer_data.getorderStatus().equals("仙桃總鋪"))
                         customerInformList.add(customer_data);
                 }
                 createOrderList();
                 storeOrderAdapter.notifyDataSetChanged();
                 root.removeEventListener(this);/**/
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -90,22 +92,30 @@ public class StoreOpenActivity extends AppCompatActivity {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                if(orderList.size() > 0){
-                    Log.v("Child Changed!!!",dataSnapshot.getValue().toString());
+                if (orderList.size() > 0) {
+                    Log.v("Child Changed!!!", dataSnapshot.getValue().toString());
                     currOrder = dataSnapshot.getValue(CustomerInformation.class);
                     createNewOrderDialog(currOrder);
                     /*if(!popUpOption)
                         root.child(dataSnapshot.getKey()).removeValue();*/
                 }
             }
+
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) { }
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+            }
+
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) { }
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+            }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) { }
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
         root.addValueEventListener(postListener);
         root.addChildEventListener(childEventListener);
@@ -121,12 +131,12 @@ public class StoreOpenActivity extends AppCompatActivity {
         String user = "真滋味";
         _order = new ArrayList<>();
 
-        storeOrderAdapter = new StoreOrderAdapter(this, orderList, user,order);
+        storeOrderAdapter = new StoreOrderAdapter(this, orderList, user, order);
         recyclerView.setAdapter(storeOrderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Set Button Click
-        //store_online_close.setOnClickListener(view -> createNewOrderDialog());
+        store_online_close.setOnClickListener(view -> finish());
     }
 
     public void createNewOrderDialog(CustomerInformation NewCI) {
@@ -144,7 +154,7 @@ public class StoreOpenActivity extends AppCompatActivity {
         String showNo = "No. " + NewCI.getNumber();
         String[] tmp = {"起司玉米蛋餅", "鬼椒牛肉起司堡"};
         StringBuilder sb = new StringBuilder();
-        for (int i = 0;i < NewCI.getMerchandise().size(); i++) {
+        for (int i = 0; i < NewCI.getMerchandise().size(); i++) {
             String s = NewCI.getMerchandise().get(i);
             sb.append(i + 1).append(". ").append(s).append("\n");
         }
@@ -201,18 +211,18 @@ public class StoreOpenActivity extends AppCompatActivity {
         return result;
     }
 
-    public void createOrderList(){
+    public void createOrderList() {
         orderList.clear();
         order.clear();
 
-        for(CustomerInformation ci : customerInformList){
+        for (CustomerInformation ci : customerInformList) {
             String[] mStringArray = new String[ci.getMerchandise().size()];
             mStringArray = ci.getMerchandise().toArray(mStringArray);
             orderList.add(mStringArray);
 
             OrderStatus test = OrderStatus.New;
             Calendar c = Calendar.getInstance();
-            Order newOD = new Order(ci.getNumber(),ci.getCustomerEmail(),ci.getMerchandise(),ci.getMerchandise(),ci.getMoney(),c.getTime(),test);
+            Order newOD = new Order(ci.getNumber(), ci.getCustomerEmail(), ci.getMerchandise(), ci.getMerchandise(), ci.getMoney(), c.getTime(), test);
             order.add(newOD);
         }
     }
