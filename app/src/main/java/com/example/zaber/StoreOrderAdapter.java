@@ -97,7 +97,7 @@ public class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.St
             DatabaseReference root = FirebaseDatabase.getInstance().getReference();
             Order od = getOrder(pos);
             root.child("store").child(od.getUser()).setValue(od);
-            //root.child("users").child(od.getUser()).removeValue();
+            root.child("users").child(od.getUser()).removeValue();
         }
     }
 }

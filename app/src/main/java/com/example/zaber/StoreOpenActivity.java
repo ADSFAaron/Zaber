@@ -73,7 +73,7 @@ public class StoreOpenActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //Log.v("DATABASE",ds.getValue().toString());
                     CustomerInformation customer_data = ds.getValue(CustomerInformation.class);
-                    if (customer_data.getorderStatus().equals("仙桃總鋪"))
+                    if (customer_data.getorderStatus().equals("陽光麵食"))
                         customerInformList.add(customer_data);
                 }
                 createOrderList();
@@ -136,7 +136,11 @@ public class StoreOpenActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Set Button Click
-        store_online_close.setOnClickListener(view -> finish());
+        store_online_close.setOnClickListener(view -> {
+            orderList.clear();
+            root.removeEventListener(childEventListener);
+            finish();
+        });
     }
 
     public void createNewOrderDialog(CustomerInformation NewCI) {
